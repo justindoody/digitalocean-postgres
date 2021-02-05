@@ -1,4 +1,4 @@
-resource "digitalocean_volume" "postgres" {
+resource "digitalocean_volume" "postgres-data" {
   region                  = "nyc3"
   name                    = "postgres"
   size                    = 10
@@ -25,9 +25,9 @@ resource "digitalocean_droplet" "postgres" {
   }
 }
 
-resource "digitalocean_volume_attachment" "postgres" {
+resource "digitalocean_volume_attachment" "postgres-data" {
   droplet_id = digitalocean_droplet.postgres.id
-  volume_id  = digitalocean_volume.postgres.id
+  volume_id  = digitalocean_volume.postgres-data.id
 }
 
 resource "digitalocean_firewall" "postgres" {

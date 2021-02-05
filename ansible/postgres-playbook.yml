@@ -17,7 +17,22 @@
       tags: packages
 
     - name: Update postgres client configuration
-      action: template src=templates/pg_hba.conf dest=/etc/postgresql/12/main/pg_hba.conf
+      template:
+        src: templates/pg_hba.conf
+        dest: /etc/postgresql/12/main/pg_hba.conf
+
+    - name: 'Create postgres storage location on volume'
+      file:
+        path: "/mnt/{{ volume_name }}/data/postgresql/12/main"
+        state: directory
+
+    - name: 'Store postgres data on attached volume'
+      command: "mv /var/lib/postgresql/12/main /mnt/{{ volume_name }}/data/postgresql/12"
+
+    - name: 'Update postgres conf for new storage location'
+      template:
+        src: templates/postgresql.conf
+        dest: /etc/postgresql/12/main/postgresql.conf
 
     - name: Ensure the PostgreSQL service is running
       service: name=postgresql state=restarted enabled=yes

@@ -7,6 +7,7 @@ sys_packages: [ 'curl', 'git', 'ufw']
 db_user: <user>
 db_name: <name>
 db_password: <pass>
+volume_name: <name>
 ```
 
 You also need to add `./hosts` with:
