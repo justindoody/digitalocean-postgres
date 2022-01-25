@@ -5,3 +5,4 @@ terraform.tfstate.backup
 terraform.tfvars
 ansible/vars/default.yml
 ansible/hosts
+scratchpad/*

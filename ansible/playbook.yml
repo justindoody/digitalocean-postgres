@@ -61,6 +61,12 @@
         rule: allow
         name: OpenSSH
 
+    - name: UFW - Allow postgres port from droplets within VPC
+      ufw:
+        rule: allow
+        src: "{{ vpc_range }}"
+        port: '5432'
+
     - name: UFW - Deny all other incoming traffic by default
       ufw:
         state: enabled

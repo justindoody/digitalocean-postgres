@@ -26,6 +26,7 @@
         path: "/mnt/{{ volume_name }}/data/postgresql/12/main"
         state: directory
 
+    # TODO: Change to a copy and remove command to make this idempotent.
     - name: 'Store postgres data on attached volume'
       command: "mv /var/lib/postgresql/12/main /mnt/{{ volume_name }}/data/postgresql/12"
 
